@@ -1,0 +1,13 @@
+.logo {
+  position: relative;
+  width: 142px;
+  height: 33px;
+  padding: 45px 0 41px 0;
+}
+@media (max-width: 767px) {
+  .logo {
+    width: 104px;
+    height: 25px;
+    padding: 28px 0 31px 24px;
+  }
+}

@@ -1,0 +1,28 @@
+.popup__status-input {
+  width: 100%;
+  height: 27px;
+  margin-bottom: 48px;
+  padding-bottom: 13px;
+
+  border: none;
+  border-bottom: 1px solid rgba(0,0,0,0.2);
+  box-sizing: border-box;
+
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+}
+.popup__status-input::placeholder {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+}
+@media (max-width: 767px) {
+  .popup__status-input {
+    margin-bottom: 45px;
+  }
+}

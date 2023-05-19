@@ -1,0 +1,4 @@
+.profile__row-name {
+  display: flex;
+  flex-direction: row;
+}

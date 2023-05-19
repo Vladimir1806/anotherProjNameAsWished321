@@ -1,0 +1,8 @@
+.popup__overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  max-width: 510px;
+  z-index: 11;
+}

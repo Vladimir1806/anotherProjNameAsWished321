@@ -1,0 +1,17 @@
+.cards__card-like-button {
+  display: flex;
+  align-self: center;
+  width: 22px;
+  height: 19px;
+  margin-left: 28px;
+  transition: all 0.4s;
+  background-image: url(../../../images/icons/icon-like.svg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  cursor: pointer;
+  border: none;
+}
+.cards__card-like-button:hover {
+  opacity: 50%;
+}

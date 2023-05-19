@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mesto</title>
+  <link rel="stylesheet" href="pages/index.css">
+</head>
+<body class="page">
+  <header class="header">
+    <img class="logo" src="images/mesto-logo.svg" alt="Логотип Mesto">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <div class="profile__owner-info-container">
+        <img class="profile__avatar" src="images/Avatar.jpg" alt="Аватар пользователя">
+        <div class="profile__info">
+          <div class="profile__row-name">
+            <h1 class="profile__info-owner-page-name">Жак-Ив Кусто</h1>
+            <button class="profile__edit-button"></button>
+          </div>
+          <p class="profile__status">Исследователь океана</p>
+        </div>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
+    <section class="cards">
+<!--      <div class="cards__card">-->
+<!--        <img class="cards__card-image" src="images/Karachaevsk.jpg" alt="Карачаевск">-->
+<!--        <div class="cards__card-header">-->
+<!--          <h2 class="cards__card-name">Карачаевск</h2>-->
+<!--          <button class="cards__card-like-button"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="cards__card">-->
+<!--        <img class="cards__card-image" src="images/Elbrus.jpg" alt="Гора Эльбрус">-->
+<!--        <div class="cards__card-header">-->
+<!--          <h2 class="cards__card-name">Гора Эльбрус</h2>-->
+<!--          <button class="cards__card-like-button"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="cards__card">-->
+<!--        <img class="cards__card-image" src="images/Dombay.jpg" alt="Домбай">-->
+<!--        <div class="cards__card-header">-->
+<!--          <h2 class="cards__card-name">Домбай</h2>-->
+<!--          <button class="cards__card-like-button"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="cards__card">-->
+<!--        <img class="cards__card-image" src="images/Elbrus.jpg" alt="Гора Эльбрус">-->
+<!--        <div class="cards__card-header">-->
+<!--          <h2 class="cards__card-name">Гора Эльбрус</h2>-->
+<!--          <button class="cards__card-like-button"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="cards__card">-->
+<!--        <img class="cards__card-image" src="images/Dombay.jpg" alt="Домбай">-->
+<!--        <div class="cards__card-header">-->
+<!--          <h2 class="cards__card-name">Домбай</h2>-->
+<!--          <button class="cards__card-like-button"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="cards__card">-->
+<!--        <img class="cards__card-image" src="images/Karachaevsk.jpg" alt="Карачаевск">-->
+<!--        <div class="cards__card-header">-->
+<!--          <h2 class="cards__card-name">Карачаево-Черкесия</h2>-->
+<!--          <button class="cards__card-like-button"></button>-->
+<!--        </div>-->
+<!--      </div>-->
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+  <!-- Попап редактирование профиля -->
+  <div class="popup" id="popup-profile">
+    <div class="popup__container">
+      <button class="popup__close-button"></button>
+      <div class="popup__content">
+        <h2 class="popup__header">Редактировать профиль</h2>
+        <form class="popup__form" name="editProfile">
+          <input class="popup__input" type="text" name="popup-input-name" required value="Жак-Ив Кусто">
+          <input class="popup__input" type="text" name="popup-input-status" required value="Исследователь океана">
+          <button class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+     </div>
+  </div>
+  <!-- Попап с формой добавления карточки -->
+  <div class="popup" id="popup-card">
+    <div class="popup__container">
+      <button class="popup__close-button"></button>
+      <div class="popup__content">
+        <h2 class="popup__header">Новое место</h2>
+        <form class="popup__form" name="addCard">
+          <input class="popup__input" type="text" name="popup-input-name" required placeholder="Название">
+          <input class="popup__input" type="text" name="popup-input-img-link" required placeholder="Исследователь океана">
+          <button class="popup__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Попап просмотра фотографии -->
+  <div class="popup-image">
+    <div class="popup-image__container">
+      <button class="popup-image__close-button"></button>
+      <div class="popup-image__content">
+        <img class="popup-image__image" alt="Указана некорректная ссылка на картинку">
+        <h2 class="popup-image__header"></h2>
+      </div>
+    </div>
+  </div>
+  <!-- Темплейт карточки места -->
+<template id="card-template">
+  <div class="cards__card">
+    <button class="cards__card-trash-icon"></button>
+    <img class="cards__card-image" alt="Фотография места">
+    <div class="cards__card-header">
+      <h2 class="cards__card-name"></h2>
+      <button class="cards__card-like-button"></button>
+    </div>
+  </div>
+</template>
+<script>
+  // Open-close events
+  document.querySelector('.profile__edit-button').addEventListener('click', () => {
+    document.querySelector('#popup-profile').classList.add('popup_opened')
+  });
+  document.querySelector('#popup-profile .popup__close-button').addEventListener('click', () => {
+    document.querySelector('#popup-profile').classList.remove('popup_opened')
+  });
+
+  document.querySelector('.profile__add-button').addEventListener('click', () => {
+    document.querySelector('.popup#popup-card').classList.add('popup_opened')
+  });
+  document.querySelector('#popup-card .popup__close-button').addEventListener('click', () => {
+    document.querySelector('.popup#popup-card').classList.remove('popup_opened')
+  });
+
+
+
+  // Submit forms events
+  const profileFormElement = document.querySelector('#popup-profile form');
+  const cardEditFormElement = document.querySelector('#popup-card form');
+
+  profileFormElement.addEventListener('submit', handleFormSubmit);
+  cardEditFormElement.addEventListener('submit', handleEditCardForm);
+
+
+  const initialCards = [
+    {
+      name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+    },
+    {
+      name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+    },
+    {
+      name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+    },
+    {
+      name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+    },
+    {
+      name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+    },
+    {
+      name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+    }
+  ];
+
+  const addLikeEvent = (target) => {
+    target.addEventListener('click', () => {
+      target.classList.toggle('cards__card-like-button_active');
+    })
+  }
+  const addDeleteEvent = (target, element) => {
+    target.addEventListener('click', () => {
+      element.remove();
+    })
+  }
+  const addCard = (name, link) => {
+    const cardTemplate = document.querySelector('#card-template').content;
+    const card = cardTemplate.querySelector('.cards__card').cloneNode(true);
+
+    card.querySelector('.cards__card-name').textContent = name;
+    card.querySelector('.cards__card-image').src = link;
+
+    const likeButton = card.querySelector('.cards__card-like-button')
+    addLikeEvent(likeButton);
+
+    const deleteButton = card.querySelector('.cards__card-trash-icon');
+    addDeleteEvent(deleteButton, card);
+
+    const imageElement = card.querySelector('.cards__card-image');
+    addZoomEvents(imageElement, link, name);
+    document.querySelector('.cards').append(card);
+  }
+  const addZoomEvents = (imageElement, imageUrl, cardName) => {
+    imageElement.addEventListener('click', () => {
+      const imagePopup = document.querySelector('.popup-image');
+
+      imagePopup.querySelector('.popup-image__image').src = imageUrl;
+      imagePopup.querySelector('.popup-image__header').textContent = cardName;
+
+      const closeButton = imagePopup.querySelector('.popup-image__close-button');
+      closeButton.addEventListener('click', () => {
+        imagePopup.classList.remove('popup-image_opened');
+      })
+        imagePopup.classList.add('popup-image_opened');
+
+      console.dir(imageElement)
+
+    })
+  }
+  //Submit form handlers
+  function handleEditCardForm(evt) {
+    evt.preventDefault();
+
+    const nameElement = cardEditFormElement.querySelector('.popup__input[name="popup-input-name"]');
+    const linkElement = cardEditFormElement.querySelector('.popup__input[name="popup-input-img-link"]');
+
+    const name = nameElement.value;
+    const link = linkElement.value;
+
+    document.querySelector('#popup-card').classList.remove('popup_opened');
+
+    addCard(name, link);
+
+    name.value = '';
+    link.value = '';
+  }
+  function handleFormSubmit(evt) {
+    evt.preventDefault();
+    const nameInput = profileFormElement.querySelector('.popup__input[name="popup-input-name"]');
+    const statusInput = profileFormElement.querySelector('.popup__input[name="popup-input-status"]');
+
+    const name = nameInput.value;
+    const profileStatus = statusInput.value;
+
+    document.querySelector('.profile__info-owner-page-name').textContent = name;
+    document.querySelector('.profile__status').textContent = profileStatus;
+
+    document.querySelector('#popup-profile').classList.remove('popup_opened');
+  }
+
+  initialCards.map( ({name, link}) => addCard(name, link));
+
+</script>
+</body>
+</html>
